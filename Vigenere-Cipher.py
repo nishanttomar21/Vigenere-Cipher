@@ -8,25 +8,9 @@
 # Importing regex library
 import re
 
-# Key and character value
+# Key and character to integer value
 key = "PASCAL"
 character_value = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-
-
-# To get integer associated with that character
-def char_to_int(character):
-    # Cast chr to int and subtract 65 to get 0-25
-    integer = int(ord(character) - 65)
-
-    return integer
-
-
-# To get character associated with that integer
-def int_to_char(integer):
-    # Cast int to char and add 65 to get A-Z
-    character = chr(integer + 65)
-
-    return character
 
 
 # Checking if the message has whitespace
