@@ -57,9 +57,9 @@ def check_input(input):
 
 # To take plain-text input from the user (Message to be encrypted)
 def take_input():
-    print("\n\n######################################")
+    print("\n\n########################################")
     print("\t\t\tVIGENERE CIPHER")
-    print("######################################\n\n")
+    print("########################################\n\n")
     input_string = ""
 
     # Loop till the input is not valid
@@ -119,23 +119,48 @@ def cipher_formula(text, key):
     return cipher_value
 
 
+# Decipher formula [D(i) = {C(i) - K(i)} mod 26]
+def decipher_formula(text, key):
+    decipher_value = []
+
+    # Loop till text length and keep applying decipher formula on each iteration
+    for index, value in enumerate(text):
+        decipher_value.append((value - key[index]) % 26)
+
+    return decipher_value
+
+
 # Function to encrypt the message
 def encryption(text, key_stream):
     # Get the integer values corresponding to the characters
     text_value = convert_string_to_values(text)
     key_stream_value = convert_string_to_values(key_stream)
 
-    # To get cipher integer value
+    # To get the cipher integer value
     cipher_value = cipher_formula(text_value, key_stream_value)
 
-    # To get cipher string
+    # To get the cipher string
     cipher_string = convert_values_to_string(cipher_value)
 
     print("\n\nEncrypted Message: " + cipher_string)
+
+    return cipher_value, key_stream_value
+
+
+# Function to decrypt the encrypted message
+def decryption(cipher, key):
+    # To get decipher integer value
+    decipher_value = decipher_formula(cipher, key)
+
+    # To get the decipher string
+    decipher_string = convert_values_to_string(decipher_value)
+
+    print("\n\nDECRYPTED MESSAGE: " + decipher_string + "\n")
 
 
 # So that this function doesn't run when some other file imports this file
 if __name__ == "__main__":
     message = take_input()
     key_stream = generate_key_stream(message)
-    encryption(message, key_stream)
+    cipher_value, key_stream_value = encryption(message, key_stream)
+    decryption(cipher_value, key_stream_value)
